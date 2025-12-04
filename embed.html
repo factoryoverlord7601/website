@@ -101,91 +101,38 @@
 <body>
 
     <!-- Header Section -->
-    <header>
-        <h1>SchoolSteam</h1>
-    </header>
-
-    Use this to bypass the snoring dog NOT the annoying gnomes
-<!-- Content Section -->
+    
     <div class="content">
-        <div class="embed-container">
-            <input type="text" id="embedUrl" placeholder="Enter a URL">
-            <button onclick="embedContent()">Go</button>
-        </div>
+  <div class="embed-container">
+    <!-- Embed your site directly in the iframe -->
+    <iframe 
+      id="embeddedContent"
+      src="https://67676767.vercel.app"
+      width="80%" 
+      height="400px" 
+      frameborder="0" 
+      allowfullscreen>
+    </iframe>
+  </div>
 
-        <div id="embeddedContent"><iframe width="80%" height="400px" frameborder="0" allowfullscreen="true"></iframe></div>
+  <!-- Fullscreen Button -->
+  <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
+</div>
 
-        <!-- Go Back Button (styled as the fullscreen button) -->
-        <button class="go-back-button" onclick="window.location.href='/'">Go Back</button>
-
-        <!-- Fullscreen Button -->
-        <button class="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</button>
-    </div>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>©2024 SchoolSteam | <a href="terms">Terms of Service</a></p>
-    </footer>
-
-    <!-- JavaScript for Embed Logic -->
-    <script>
-        function embedContent() {
-            let url = document.getElementById('embedUrl').value;
-
-            // Check if the URL starts with 'http://' or 'https://'. If not, add 'https://'.
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                url = 'https://' + url;
-            }
-
-            const embeddedContentDiv = document.getElementById('embeddedContent');
-
-            // Clear previous embedded content
-            embeddedContentDiv.innerHTML = '';
-
-            // Check if it's an image URL
-            if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
-                const img = document.createElement('img');
-                img.src = url;
-                img.alt = "Embedded Image";
-                embeddedContentDiv.appendChild(img);
-            } 
-            // Check if it's a YouTube video URL
-            else if (url.match(/https:\/\/www\.youtube\.com\/watch\?v=[A-Za-z0-9_-]+/)) {
-                const videoId = url.split('v=')[1].split('&')[0];
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                iframe.setAttribute('allowfullscreen', 'true');
-                embeddedContentDiv.appendChild(iframe);
-            }
-            // Check if it's a generic URL that can be embedded in iframe (e.g., Vimeo)
-            else if (url.match(/^https?:\/\//)) {
-                const iframe = document.createElement('iframe');
-                iframe.src = url;
-                iframe.setAttribute('width', '80%');
-                iframe.setAttribute('height', '400px');
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allowfullscreen', 'true');
-                embeddedContentDiv.appendChild(iframe);
-            } else {
-                embeddedContentDiv.innerHTML = "<p>Invalid URL. Please enter a valid image, video, or embeddable link.</p>";
-            }
-        }
-
-        // JavaScript for Fullscreen
-        function toggleFullscreen() {
-            var embedElement = document.querySelector("#embeddedContent iframe, #embeddedContent img");
-
-            if (embedElement && embedElement.requestFullscreen) {
-                embedElement.requestFullscreen();
-            } else if (embedElement && embedElement.mozRequestFullScreen) { // Firefox
-                embedElement.mozRequestFullScreen();
-            } else if (embedElement && embedElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
-                embedElement.webkitRequestFullscreen();
-            } else if (embedElement && embedElement.msRequestFullscreen) { // IE/Edge
-                embedElement.msRequestFullscreen();
-            }
-        }
-    </script>
+<script>
+  function toggleFullscreen() {
+    const iframe = document.getElementById("embeddedContent");
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+      iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+      iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+      iframe.msRequestFullscreen();
+    }
+  }
+</script>
 
 
 
